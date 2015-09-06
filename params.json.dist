@@ -1,0 +1,11 @@
+{
+	"user": {
+		"username": "me",
+		"password": "myaccountpassword"
+	},
+	"app": {
+		"client_id": 007,
+		"client_secret": "0123456789abcdef",
+		"redirect_uri": "app://host"
+	}
+}

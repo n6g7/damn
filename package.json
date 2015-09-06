@@ -1,0 +1,12 @@
+{
+  "name": "damn",
+  "version": "0.0.1",
+  "description": "DeviantArt API client",
+  "main": "index.js",
+  "author": "as0n <as0n@gnab.fr>",
+  "repository": "as0n/damn",
+  "dependencies": {
+    "debug": "^2.2.0",
+    "request": "^2.59.0"
+  }
+}
