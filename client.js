@@ -1,4 +1,4 @@
-var request = require('./da-request'),
+var daRequest = require('./da-request'),
 	apiDebug = require('debug')('da:api'),
 	tokenDebug = require('debug')('da:token'),
 	ddDebug = require('debug')('da:dd');

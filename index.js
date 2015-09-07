@@ -1,7 +1,9 @@
-var request = require('./da-request'),
+var daRequest = require('./da-request'),
 	Client = require('./client');
 
 function clientCredentials(clientId, clientSecret, cb) {
+	var request = daRequest();
+
 	request({
 		url: '/oauth2/token',
 		qs: {
@@ -17,6 +19,8 @@ function clientCredentials(clientId, clientSecret, cb) {
 }
 
 function implicit(username, password, clientId, redirectUri, cb) {
+	var request = daRequest();
+
 	// Get CSRF token
 	request('/users/rockedout', function(err, res, body) {
 		if (err) return cb(err);
