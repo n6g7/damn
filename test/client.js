@@ -1,19 +1,35 @@
 var assert = require('assert'),
 	expect = require('chai').expect,
-	Client = require('../client');
+	dAmn = require('../index'),
+	Client = require('../client'),
+	params = require('./params');
 
 describe('Client', function() {
-	var publicClient, privateClient;
+	var dummyToken = 'abc123',
+		publicClient, privateClient,
+		badPublicClient, badPrivateClient;
 
-	beforeEach(function() {
-		publicClient = new Client('abc123');
-		privateClient = new Client('abc123', true);
+	before(function(done) {
+		this.timeout(4000);
+
+		badPublicClient = new Client(dummyToken);
+		badPrivateClient = new Client(dummyToken, true);
+
+		dAmn.public(params.app.client_id, params.app.client_secret, function(err, daClient) {
+			publicClient = daClient;
+
+			dAmn.private(params.user.username, params.user.password, params.app.client_id, params.app.redirect_uri, function(err, daClient) {
+				privateClient = daClient;
+
+				done();
+			})
+		});
 	});
 
 	describe('constructor()', function() {
 		it('should set an access token', function() {
-			expect(publicClient).to.have.property('accessToken');
-			expect(publicClient.accessToken).to.equal('abc123');
+			expect(badPublicClient).to.have.property('accessToken');
+			expect(badPublicClient.accessToken).to.equal(dummyToken);
 		});
 		it('should set a `privateAccess` boolean', function() {
 			expect(publicClient).to.have.property('privateAccess');
@@ -27,39 +43,70 @@ describe('Client', function() {
 		});
 	});
 
-	describe('getDeviation(deviationId)', function() {
+	describe('API calls', function() {
+		describe('getDeviation(deviationId)', function() {
 
+		});
+
+		describe('getDeviationContent(deviationId)', function() {
+
+		});
+
+		describe('getMoreLike(deviationId)', function() {
+
+		});
+
+		describe('getNewest()', function() {
+
+		});
+
+		describe('getPopular()', function() {
+
+		});
+
+		describe('getWhatsHot()', function() {
+
+		});
+
+		describe('getDailyDeviations()', function() {
+
+		});
+
+		describe('getNotifications()', function() {
+
+		});
+
+		describe('placebo()', function() {
+			it('should return a status string', function(done) {
+				publicClient.placebo(function(err, data) {
+					expect(err).to.be.null;
+					expect(data).to.have.property('status');
+					expect(data.status).to.equal('success');
+					done();
+				});
+			});
+		});
 	});
 
-	describe('getDeviationContent(deviationId)', function() {
+	describe('Utils', function() {
+		describe('checkAccessToken()', function() {
+			it('should return `true` for a valid token', function(done) {
+				publicClient.checkAccessToken(function(err, b) {
+					expect(err).to.be.null;
+					expect(b).to.be.a.boolean;
+					expect(b).to.equal(true);
+					done();
+				})
+			});
 
-	});
-
-	describe('getMoreLike(deviationId)', function() {
-
-	});
-
-	describe('getNewest()', function() {
-
-	});
-
-	describe('getPopular()', function() {
-
-	});
-
-	describe('getWhatsHot()', function() {
-
-	});
-
-	describe('getDailyDeviations()', function() {
-
-	});
-
-	describe('getNotifications()', function() {
-
-	});
-
-	describe('placebo()', function() {
-
+			it('should return `false` for an invalid token', function(done) {
+				badPublicClient.checkAccessToken(function(err, b) {
+					expect(err).to.be.null;
+					expect(b).to.be.a.boolean;
+					expect(b).to.equal(false);
+					done();
+				})
+			});
+		});
 	});
 });

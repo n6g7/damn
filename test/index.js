@@ -19,6 +19,8 @@ describe('Client generation', function() {
 	});
 	describe('Implicit', function() {
 		it('should return a Client instance', function(done) {
+			this.timeout(3000);
+
 			dAmn.private(params.user.username, params.user.password, params.app.client_id, params.app.redirect_uri, function(err, daClient) {
 				if (err) return done(err);
 
