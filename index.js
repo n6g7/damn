@@ -53,7 +53,7 @@ function implicit(username, password, clientId, redirectUri, cb) {
 					client_id: clientId,
 					redirect_uri: redirectUri,
 					state: state,
-					scope: 'basic'
+					scope: 'feed basic'
 				}
 			}, function(err, res, body) {
 				if (err) return cb(err);

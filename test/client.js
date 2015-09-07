@@ -76,7 +76,25 @@ describe('Client', function() {
 		});
 
 		describe('getNotifications()', function() {
+			it('should return a bunch of notifications', function(done) {
+				privateClient.getNotifications(function(err, data) {
+					expect(err).to.be.null;
+					expect(data).to.be.an.array;
+					if (data.length > 0) expect(data[0]).to.contain.keys('ts', 'type', 'by_user');
+					done();
+				});
+			});
+		});
 
+		describe('getWatchFeed()', function() {
+			it('should return a bunch of feed items', function(done) {
+				privateClient.getWatchFeed(function(err, data) {
+					expect(err).to.be.null;
+					expect(data).to.be.an.array;
+					if (data.length > 0) expect(data[0]).to.contain.keys('ts', 'type', 'by_user');
+					done();
+				});
+			});
 		});
 
 		describe('placebo()', function() {
