@@ -18,6 +18,17 @@ function Client(accessToken, privateAccess) {
 }
 
 // API calls
+Client.prototype.getDailyDeviations = function(cb) {
+	this.request({
+		url: '/browse/dailydeviations',
+		qs: {
+			mature_content: !this.matureFilter
+		}
+	}, function(err, res, body) {
+		return cb(err, body.results);
+	});
+};
+
 Client.prototype.placebo = function(cb) {
 	this.request('/placebo', function(err, res, body) {
 		return cb(err, body);

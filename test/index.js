@@ -11,8 +11,7 @@ describe('Client generation', function() {
 
 				expect(daClient).to.have.property('accessToken');
 				expect(daClient.accessToken).to.be.a.string;
-				expect(daClient).to.have.property('privateAccess');
-				expect(daClient.privateAccess).to.equal(false);
+				expect(daClient).to.have.property('privateAccess', false);
 				done();
 			});
 		});
@@ -26,8 +25,7 @@ describe('Client generation', function() {
 
 				expect(daClient).to.have.property('accessToken');
 				expect(daClient.accessToken).to.be.a.string;
-				expect(daClient).to.have.property('privateAccess');
-				expect(daClient.privateAccess).to.equal(true);
+				expect(daClient).to.have.property('privateAccess', true);
 				done();
 			});
 		});

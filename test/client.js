@@ -28,18 +28,14 @@ describe('Client', function() {
 
 	describe('constructor()', function() {
 		it('should set an access token', function() {
-			expect(badPublicClient).to.have.property('accessToken');
-			expect(badPublicClient.accessToken).to.equal(dummyToken);
+			expect(badPublicClient).to.have.property('accessToken', dummyToken);
 		});
 		it('should set a `privateAccess` boolean', function() {
-			expect(publicClient).to.have.property('privateAccess');
-			expect(publicClient.privateAccess).to.equal(false);
-			expect(privateClient).to.have.property('privateAccess');
-			expect(privateClient.privateAccess).to.equal(true);
+			expect(publicClient).to.have.property('privateAccess', false);
+			expect(privateClient).to.have.property('privateAccess', true);
 		});
 		it('should set a `matureFilter` boolean', function() {
-			expect(publicClient).to.have.property('matureFilter');
-			expect(publicClient.matureFilter).to.equal(true);
+			expect(publicClient).to.have.property('matureFilter', true);
 		});
 	});
 
@@ -69,7 +65,14 @@ describe('Client', function() {
 		});
 
 		describe('getDailyDeviations()', function() {
-
+			it('should return a bunch of deviations', function(done) {
+				publicClient.getDailyDeviations(function(err, data) {
+					expect(err).to.be.null;
+					expect(data).to.be.an.array;
+					expect(data[0]).to.contain.keys('deviationid', 'url', 'title', 'author');
+					done();
+				});
+			})
 		});
 
 		describe('getNotifications()', function() {
@@ -80,8 +83,7 @@ describe('Client', function() {
 			it('should return a status string', function(done) {
 				publicClient.placebo(function(err, data) {
 					expect(err).to.be.null;
-					expect(data).to.have.property('status');
-					expect(data.status).to.equal('success');
+					expect(data).to.have.property('status', 'success');
 					done();
 				});
 			});
