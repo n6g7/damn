@@ -1,5 +1,5 @@
 {
-  "name": "damn",
+  "name": "dAmn",
   "version": "0.0.1",
   "description": "DeviantArt API client",
   "main": "index.js",
@@ -8,5 +8,12 @@
   "dependencies": {
     "debug": "^2.2.0",
     "request": "^2.59.0"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.3.1"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha"
   }
 }

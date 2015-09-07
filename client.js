@@ -7,6 +7,8 @@ function Client(accessToken, privateAccess) {
 	this.accessToken = accessToken;
 	this.privateAccess = privateAccess || false;
 
+	this.matureFilter = true;
+
 	this.dailies = {
 		cache : null,
 		lastRequest : 0
