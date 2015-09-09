@@ -1,3 +1,5 @@
+'use strict';
+
 var daRequest = require('./da-request'),
 	Client = require('./client');
 

@@ -4,14 +4,16 @@ Node.js DeviantArt API client
 ## Quick start
 
 ```javascript
-var dAmn = require('damn'),
-	da = dAmn.public(1234, 'cl13nt_s3cr3t');
+var dAmn = require('damn');
 
-// Fetch today's daily deviations
-da.getDailyDeviations(function(err, data) {
-	// Output one title
-	console.log(data[0].title);
+dAmn.public(1234, 'cl13nt_s3cr3t', function(err, daClient) {
+	// Fetch today's daily deviations
+	da.getDailyDeviations(function(err, data) {
+		// Output one title
+		console.log(data[0].title);
+	});
 });
+
 ```
 
 ## Client generation
@@ -24,7 +26,7 @@ Both methods require a `client_id` and a `client_secret` to be granted an access
 The easiest way to access public API is to use the *Client Credentials* method, which is available via `dAmn.public` :
 
 ```javascript
-dAmn.public(4321, 'cl13nt_s3cr3t', function(publicClient) {
+dAmn.public(4321, 'cl13nt_s3cr3t', function(err, publicClient) {
 	publicClient.getDeviation(...);
 });
 ```
@@ -42,7 +44,7 @@ If you're using this method, make sure your "OAuth2 Grant Type" settings is set 
 To instanciate a "private" client you may use `dAmn.private` method :
 
 ```javascript
-dAmn.private('username', 'password', 1234, 'https://www.example.com', function(privateClient) {
+dAmn.private('username', 'password', 1234, 'https://www.example.com', function(err, privateClient) {
 	privateClient.getWatchFeed(...);
 });
 ```
@@ -131,6 +133,7 @@ client.checkAccessToken(function(err, isValid) {
 
 ## Todo
 
+ - [X] Use [Node.js v4.0.0](https://github.com/nodejs/node/blob/v4.0.0/CHANGELOG.md) and ES6 features
  - [ ] Automate token refresh
  - [ ] Use code linting tools :
 	- [ ] jshint

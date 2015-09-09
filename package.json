@@ -1,6 +1,6 @@
 {
   "name": "damn",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "DeviantArt API client",
   "main": "index.js",
   "author": "as0n <as0n@gnab.fr>",
@@ -17,5 +17,13 @@
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha"
   },
-  "keywords": "deviantart, api, client, art"
+  "keywords": [
+    "deviantart",
+    "api",
+    "client",
+    "art"
+  ],
+  "engines": {
+    "node": ">=4.0.0"
+  }
 }
