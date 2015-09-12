@@ -1,4 +1,4 @@
-# dAmn
+# dAmn [![bitHound Score](https://www.bithound.io/github/as0n/damn/badges/score.svg)](https://www.bithound.io/github/as0n/damn)
 Node.js DeviantArt API client
 
 ## Quick start

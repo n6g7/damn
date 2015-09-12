@@ -16,13 +16,17 @@ describe('Client', function() {
 		badPrivateClient = new Client(dummyToken, true);
 
 		dAmn.public(params.app.client_id, params.app.client_secret, function(err, daClient) {
+			expect(err).to.be.null;
+
 			publicClient = daClient;
 
 			dAmn.private(params.user.username, params.user.password, params.app.client_id, params.app.redirect_uri, function(err, daClient) {
+				expect(err).to.be.null;
+
 				privateClient = daClient;
 
 				done();
-			})
+			});
 		});
 	});
 
@@ -72,7 +76,7 @@ describe('Client', function() {
 					expect(data[0]).to.contain.keys('deviationid', 'url', 'title', 'author');
 					done();
 				});
-			})
+			});
 		});
 
 		describe('getNotifications()', function() {
@@ -116,7 +120,7 @@ describe('Client', function() {
 					expect(b).to.be.a.boolean;
 					expect(b).to.equal(true);
 					done();
-				})
+				});
 			});
 
 			it('should return `false` for an invalid token', function(done) {
@@ -125,7 +129,7 @@ describe('Client', function() {
 					expect(b).to.be.a.boolean;
 					expect(b).to.equal(false);
 					done();
-				})
+				});
 			});
 		});
 	});
