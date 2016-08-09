@@ -22,6 +22,43 @@ class Client {
 
 	// API calls
 
+	getDeviation(deviationId, cb) {
+		this.request('/deviation/' + deviationId, function(err, res, body) {
+			return cb(err, body);
+		});
+	}
+
+	getFolderDeviations(options, cb) {
+		options = options || {};
+		options.folderId = options.folderId || "";
+		options.offset = options.offset || 0;
+		this.request({
+			url: '/gallery/' + options.folderId,
+			qs: {
+				offset: options.offset,
+				mature_content: !this.matureFilter
+			}
+		}, function(err, res, body) {
+			return cb(err, body);
+		});
+	}
+
+	getGalleryFolders(options, cb) {
+		options = options || {};
+		options.offset = options.offset || 0;
+		this.request({
+			url: '/gallery/folders',
+			qs: {
+				username: options.username,
+				offset: options.offset,
+				calculate_size: true,
+				mature_content: !this.matureFilter
+			}
+		}, function(err, res, body) {
+			return cb(err, body);
+		});
+	}	
+
 	getDailyDeviations(cb) {
 		this.request({
 			url: '/browse/dailydeviations',
