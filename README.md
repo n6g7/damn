@@ -8,7 +8,7 @@ var dAmn = require('damn');
 
 dAmn.public(1234, 'cl13nt_s3cr3t', function(err, daClient) {
 	// Fetch today's daily deviations
-	da.getDailyDeviations(function(err, data) {
+	daClient.getDailyDeviations(function(err, data) {
 		// Output one title
 		console.log(data[0].title);
 	});
@@ -103,6 +103,58 @@ client.getWatchFeed(function(err, watchFeedItems) {
 **Parameters** :
 - `callback` : called with two parameters : *error* (`null` if none) and an array containing the watch feed items.
 
+### getDeviation(*deviationId*, *callback*)
+
+> Public endpoint
+
+Returns the details of a specific deviation :
+
+```javascript
+client.getDeviation("deviationId", function(err, data) {
+	console.log(data);
+});
+```
+
+**Parameters** :
+ - `deviationId` : the deviation id, as a *string*.
+ - `callback` : called with two parameters : *error* (`null` if none) and an object containing the deviation.
+
+### getFolderDeviations(*options*, *callback*)
+
+> Public endpoint
+
+Returns the list of a folder's deviations (all user's deviations if no `folderId` is given) :
+
+```javascript
+client.getFolderDeviations({
+	folderId: "folderId"
+}, function(err, data) {
+	console.log(data);
+});
+```
+
+**Parameters** :
+ - `options` : an object with optional `folderId` and `offset` keys.
+ - `callback` : called with two parameters : *error* (`null` if none) and an array containing the folder's deviations.
+
+### getGalleryFolders(*options*, *callback*)
+
+> Public endpoint
+
+Returns the list of an user's gallery folders :
+
+```javascript
+client.getGalleryFolders({
+	username: "username"
+}, function(err, folders) {
+	console.log(folders);
+});
+```
+
+**Parameters** :
+ - `options` : an object with a required `username` key and an optional `offset` key.
+ - `callback` : called with two parameters : *error* (`null` if none) and an array containing the specified user folders.
+
 ### placebo(*callback*)
 
 > Public endpoint
@@ -139,7 +191,7 @@ client.checkAccessToken(function(err, isValid) {
 	- [ ] jshint
 	- [ ] jscs
  - [ ] Add access to the following routes :
-	- [ ] `/deviation/{deviationid}` Fetch a deviation
+	- [X] `/deviation/{deviationid}` Fetch a deviation
 	- [ ] `/deviation/content` Fetch full data that is not included in the main devaition object
 	- [ ] `/browse/morelikethis` Fetch MoreLikeThis result for a seed deviation
 	- [ ] `/browse/newest` Browse newest deviations
