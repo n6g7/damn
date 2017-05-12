@@ -11,8 +11,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "debug": "^2.2.0",
-    "request": "^2.61.0"
+    "request": "^2.81.0"
   },
   "devDependencies": {
     "jest": "^20.0.0",
