@@ -11,6 +11,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "debug": "^2.6.6",
     "request": "^2.81.0",
     "uuid": "^3.0.1"
   },
