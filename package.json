@@ -2,7 +2,7 @@
   "name": "damn",
   "version": "0.0.2-b",
   "description": "DeviantArt API client",
-  "main": "index.js",
+  "main": "lib/index.js",
   "author": "Nathan Gaberel <nathan@gnab.fr>",
   "license": "MIT",
   "repository": "git@github.com:n6g7/damn.git",
