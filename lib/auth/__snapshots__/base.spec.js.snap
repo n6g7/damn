@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthenticationStrategy getToken() should not be implemented 1`] = `"Implement me!"`;
