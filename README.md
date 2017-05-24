@@ -1,202 +1,154 @@
-# dAmn [![bitHound Score](https://www.bithound.io/github/as0n/damn/badges/score.svg)](https://www.bithound.io/github/as0n/damn)
+# dAmn
+[![CircleCI](https://circleci.com/gh/n6g7/damn.svg?style=svg)](https://circleci.com/gh/n6g7/damn) [![bitHound Score](https://www.bithound.io/github/n6g7/damn/badges/score.svg)](https://www.bithound.io/github/n6g7/damn)
+
 Node.js DeviantArt API client
 
 ## Quick start
 
-```javascript
-var dAmn = require('damn');
+Install:
 
-dAmn.public(1234, 'cl13nt_s3cr3t', function(err, daClient) {
-	// Fetch today's daily deviations
-	daClient.getDailyDeviations(function(err, data) {
-		// Output one title
-		console.log(data[0].title);
-	});
-});
+```shell
+yarn add damn
+```
+
+```js
+const Damn = require('damn');
+
+const clientId = 1234
+const clientSecret = 'thisissecret'
+
+Damn.clientCredentials(clientId, clientSecret)
+.then(damn => damn.getDailyDeviations())
+.then(dailyDeviations => {
+  ...
+})
 
 ```
 
 ## Client generation
 
-dAmn currently supports two [authentication methods](https://www.deviantart.com/developers/authentication) : *Client Credentials* and *Implicit*. Both of them provide access to public endpoints. The *Implicit* method however is an user authentication method and also provides access to user-specific APIs.
+dAmn currently supports two [authentication methods](https://www.deviantart.com/developers/authentication): *Client Credentials* and *Implicit*.
+Both provide access to public endpoints but only the *Implicit* method grants access to user-specific APIs.
 
 Both methods require a `client_id` and a `client_secret` to be granted an access token. These are obtained by creating an app in [DeviantArt's application page](https://www.deviantart.com/developers/apps).
 
 ### Public API
-The easiest way to access public API is to use the *Client Credentials* method, which is available via `dAmn.public` :
+The easiest way to access public API is to use the *Client Credentials* method, which is available via `Damn.clientCredentials`:
 
-```javascript
-dAmn.public(4321, 'cl13nt_s3cr3t', function(err, publicClient) {
-	publicClient.getDeviation(...);
-});
+```js
+Damn.clientCredentials('4321', 'cl13nt_s3cr3t')
+.then(damn => {
+  damn.getDailyDeviations()
+  [...]
+})
 ```
 
 Where `4321` is your `client_id` and `cl13nt_s3cr3t` is your `client_secret`.
 
-This returns a `Client` object from which you can call the methods *marked public* described below.
+The `Damn.clientCredentials()` call returns a promise which resolves to a `Damn` object, from which you can call the methods marked *public* described below.
 
 ### Logged-in API
-Accessing user-specific endpoints can only be done via using the *Implicit* authentication method. This methods requires you to provide an username, a password, a `client_id` and `redirect_uri` for the application you created.
+Accessing user-specific endpoints can only be done when using the *Implicit* authentication method. This methods requires you to provide an username, a password, a `client_id` and a `redirect_uri` for the application you created.
 
-If you're using this method, make sure your "OAuth2 Grant Type" settings is set to "Implicit" in your application parameters :
+If you're using this method, make sure your "OAuth2 Grant Type" settings is set to "Implicit" in your application parameters:
 ![DA application's OAuth Grant Type setting](doc/oauth-setting.png)
 
-To instanciate a "private" client you may use `dAmn.private` method :
+To instanciate a "private" client you may use the `Damn.implicit` method:
 
-```javascript
-dAmn.private('username', 'password', 1234, 'https://www.example.com', function(err, privateClient) {
-	privateClient.getWatchFeed(...);
-});
+```js
+const clientId = 1234
+const redirectUri = 'https://www.example.com'
+const username = 'toto'
+const password = 'h4xXx0r'
+const scope = 'basic'
+
+Damn.implicit(clientId, redirectUri, username, password, scope)
+.then(damn => {
+  damn.getDailyDeviations()
+  [...]
+})
 ```
 
-Where `1234` is your `client_id` and `https://www.example.com` is your `redirect_uri`.
-
-This returns a `Client` object from which you can call all the methods described below.
+The `Damn.implicit()` call returns a promise which resolves to a `Damn` object, from which you can call all the methods described below.
 
 
 ## Methods
 
-All these methods are asynchronous.
+All these methods are asynchronous and return promises.
 
-### getDailyDeviations(*callback*)
+### getDailyDeviations()
 
 > Public endpoint
 
-Returns the list of today's [daily deviations](http://www.deviantart.com/dailydeviations/) :
+Returns the list of today's [daily deviations](http://www.deviantart.com/dailydeviations/):
 
-```javascript
-client.getDailyDeviations(function(err, dailyDeviations) {
-	console.log(dailyDeviations);
-});
+```js
+damn.getDailyDeviations
+.then(dailyDeviations => {
+  ...
+})
 ```
 
-**Parameters** :
- - `callback` : called with two parameters : *error* (`null` if none) and an array containing the daily deviations.
-
-### getNotifications(*callback*)
+### getNotifications()
 
 > Private endpoint
 
-Returns the list of current user notifications :
+Returns the list of current user notifications:
 
-```javascript
-client.getNotifications(function(err, notifications) {
-   console.log(notifications);
-});
+```js
+damn.getNotifications
+.then(notifications => {
+  ...
+})
 ```
 
-**Parameters** :
-- `callback` : called with two parameters : *error* (`null` if none) and an array containing the notifications.
-
-### getWatchFeed(*callback*)
+### getWatchFeed()
 
 > Private endpoint
 
-Returns the current user's watch feed :
+Returns the current user's watch feed:
 
-```javascript
-client.getWatchFeed(function(err, watchFeedItems) {
-   console.log(watchFeedItems);
-});
+```js
+damn.getWatchFeed
+.then(feed => {
+  ...
+})
 ```
 
-**Parameters** :
-- `callback` : called with two parameters : *error* (`null` if none) and an array containing the watch feed items.
-
-### getDeviation(*deviationId*, *callback*)
+### placebo()
 
 > Public endpoint
 
-Returns the details of a specific deviation :
+Implementation of DA's [placebo](https://www.deviantart.com/developers/http/v1/20150824/placebo/53b9f8bd16df06555acb1dfc06e6df69) route. Use it to check you access token validity. Or better yet, use `checkAccessToken()`!
 
-```javascript
-client.getDeviation("deviationId", function(err, data) {
-	console.log(data);
-});
+```js
+damn.placebo.then(placebo => {
+  ...
+})
 ```
 
-**Parameters** :
- - `deviationId` : the deviation id, as a *string*.
- - `callback` : called with two parameters : *error* (`null` if none) and an object containing the deviation.
+### checkAccessToken()
 
-### getFolderDeviations(*options*, *callback*)
+Check the validity of your access token, returns a boolean.
 
-> Public endpoint
-
-Returns the list of a folder's deviations (all user's deviations if no `folderId` is given) :
-
-```javascript
-client.getFolderDeviations({
-	folderId: "folderId"
-}, function(err, data) {
-	console.log(data);
-});
+```js
+damn.checkAccessToken.then(validToken => {
+  ...
+})
 ```
-
-**Parameters** :
- - `options` : an object with optional `folderId` and `offset` keys.
- - `callback` : called with two parameters : *error* (`null` if none) and an array containing the folder's deviations.
-
-### getGalleryFolders(*options*, *callback*)
-
-> Public endpoint
-
-Returns the list of an user's gallery folders :
-
-```javascript
-client.getGalleryFolders({
-	username: "username"
-}, function(err, folders) {
-	console.log(folders);
-});
-```
-
-**Parameters** :
- - `options` : an object with a required `username` key and an optional `offset` key.
- - `callback` : called with two parameters : *error* (`null` if none) and an array containing the specified user folders.
-
-### placebo(*callback*)
-
-> Public endpoint
-
-Implementation of DA's [placebo](https://www.deviantart.com/developers/http/v1/20150824/placebo/53b9f8bd16df06555acb1dfc06e6df69) route. Use it to check you access token validity. Or better yet, use `checkAccessToken()` !
-
-```javascript
-client.placebo(function(err, statusData) {
-   console.log(statusData);
-});
-```
-
-**Parameters** :
-- `callback` : called with two parameters : *error* (`null` if none) and an the status object.
-
-### checkAccessToken(*callback*)
-
-Check the validity of your access token.
-
-```javascript
-client.checkAccessToken(function(err, isValid) {
-   console.log(isValid);
-});
-```
-
-**Parameters** :
-- `callback` : called with two parameters : *error* (`null` if none) and a boolean indicating whether the current access token is still valid.
 
 ## Todo
 
  - [X] Use [Node.js v4.0.0](https://github.com/nodejs/node/blob/v4.0.0/CHANGELOG.md) and ES6 features
  - [ ] Automate token refresh
- - [ ] Use code linting tools :
-	- [ ] jshint
-	- [ ] jscs
- - [ ] Add access to the following routes :
-	- [X] `/deviation/{deviationid}` Fetch a deviation
-	- [ ] `/deviation/content` Fetch full data that is not included in the main devaition object
-	- [ ] `/browse/morelikethis` Fetch MoreLikeThis result for a seed deviation
-	- [ ] `/browse/newest` Browse newest deviations
-	- [ ] `/browse/popular` Browse popular deviations
-	- [ ] `/browse/hot` Browse whats hot deviations
-	- [ ] and all others routes ?
+ - [X] Setup linter
+ - [ ] Add access to the following routes:
+  - [X] `/deviation/{deviationid}` Fetch a deviation
+  - [ ] `/deviation/content` Fetch full data that is not included in the main devaition object
+  - [ ] `/browse/morelikethis` Fetch MoreLikeThis result for a seed deviation
+  - [ ] `/browse/newest` Browse newest deviations
+  - [ ] `/browse/popular` Browse popular deviations
+  - [ ] `/browse/hot` Browse whats hot deviations
+  - [ ] and all others routes ?
  - [ ] Revoke access / logout
  - [ ] Find a way to implement [Authorization Code](https://www.deviantart.com/developers/authentication) as an authentication method
