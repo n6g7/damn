@@ -115,6 +115,24 @@ damn.getWatchFeed
 })
 ```
 
+### getDeviation(*deviationId*)
+
+> Public endpoint
+
+Returns the details of a specific deviation:
+
+```js
+const deviationId = 12345
+
+damn.getDeviation(deviationId)
+.then(deviation => {
+  ...
+})
+```
+
+**Parameters**:
+ - `deviationId` (string): the deviation id.
+
 ### placebo()
 
 > Public endpoint
