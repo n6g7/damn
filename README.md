@@ -1,4 +1,6 @@
-# dAmn [![bitHound Score](https://www.bithound.io/github/as0n/damn/badges/score.svg)](https://www.bithound.io/github/as0n/damn)
+# dAmn
+[![CircleCI](https://circleci.com/gh/n6g7/damn.svg?style=svg)](https://circleci.com/gh/n6g7/damn) [![bitHound Score](https://www.bithound.io/github/n6g7/damn/badges/score.svg)](https://www.bithound.io/github/n6g7/damn)
+
 Node.js DeviantArt API client
 
 ## Quick start
