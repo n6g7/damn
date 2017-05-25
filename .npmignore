@@ -1,0 +1,5 @@
+.bithoundrc
+.git
+circle.yml
+node_modules
+*.spec.js
