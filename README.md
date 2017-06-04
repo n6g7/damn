@@ -1,5 +1,5 @@
 # dAmn
-[![CircleCI](https://circleci.com/gh/n6g7/damn.svg?style=svg)](https://circleci.com/gh/n6g7/damn) [![bitHound Score](https://www.bithound.io/github/n6g7/damn/badges/score.svg)](https://www.bithound.io/github/n6g7/damn)
+[![CircleCI](https://circleci.com/gh/n6g7/damn.svg?style=svg)](https://circleci.com/gh/n6g7/damn) [![npm version](https://badge.fury.io/js/damn.svg)](https://badge.fury.io/js/damn) [![Coverage Status](https://coveralls.io/repos/github/n6g7/damn/badge.svg?branch=master)](https://coveralls.io/github/n6g7/damn?branch=master) [![bitHound Score](https://www.bithound.io/github/n6g7/damn/badges/score.svg)](https://www.bithound.io/github/n6g7/damn)
 
 Node.js DeviantArt API client
 
