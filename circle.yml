@@ -37,3 +37,4 @@ jobs:
           key: damn-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - ~/.yarn
+            - ~/damn/node_modules
