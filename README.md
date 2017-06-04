@@ -133,6 +133,61 @@ damn.getDeviation(deviationId)
 **Parameters**:
  - `deviationId` (string): the deviation id.
 
+### galleryAll(*username*)
+
+> Public endpoint
+
+Returns the list of a user's deviations:
+
+```js
+const username = 'sdqlm'
+
+damn.galleryAll(username)
+.then(deviations => {
+  ...
+})
+```
+
+**Parameters**:
+ - `username` (string): optional `username`, defaults to current user
+
+### galleryFolder(*folderId*, *username*)
+
+> Public endpoint
+
+Returns the list of a folder's deviations (all user's deviations if no `folderId` is given):
+
+```js
+const folderId = 12345
+
+damn.galleryFolder(folderId)
+.then(deviations => {
+  ...
+})
+```
+
+**Parameters**:
+ - `folderId` (string): optional `folderId`
+ - `username` (string): optional `username`, defaults to current user
+
+### galleryFolders(*username*)
+
+> Public endpoint
+
+Returns the list of an user's gallery folders:
+
+```js
+const username = 'qpsdlq'
+
+damn.galleryFolders(username)
+.then(deviations => {
+  ...
+})
+```
+
+**Parameters**:
+ - `username` (string): optional `username`, defaults to current user
+
 ### placebo()
 
 > Public endpoint
