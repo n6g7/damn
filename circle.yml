@@ -10,6 +10,13 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          keys:
+            - damn-{{ .Branch }}-{{ checksum "package.json" }}
+            - damn-{{ .Branch }}
+            - damn-master-{{ checksum "package.json" }}
+            - damn-master
+
       - run:
           name: Install dependencies
           command: yarn
@@ -19,6 +26,6 @@ jobs:
           command: yarn test
 
       - save_cache:
-          key: yarn
+          key: damn-{{ .Branch }}-{{ checksum "package.json" }}
           paths:
             - ~/.yarn
