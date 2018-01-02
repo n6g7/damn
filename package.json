@@ -8,8 +8,9 @@
   "repository": "git@github.com:n6g7/damn.git",
   "scripts": {
     "cleanup": "rimraf dist",
-    "build": "yarn cleanup && babel lib --out-dir dist",
-    "prepublish": "yarn test && yarn build",
+    "build": "yarn cleanup && NODE_ENV=production babel lib --out-dir dist",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn test",
     "pretest": "standard",
     "test": "jest"
   },
