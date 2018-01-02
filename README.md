@@ -76,7 +76,7 @@ The `Damn.implicit()` call returns a promise which resolves to a `Damn` object, 
 
 All these methods are asynchronous and return promises.
 
-### getDailyDeviations()
+### getDailyDeviations(*qs*)
 
 > Public endpoint
 
@@ -89,7 +89,10 @@ damn.getDailyDeviations
 })
 ```
 
-### getNotifications()
+**Parameters**:
+ - `qs` (object): additional query parameters (eg. for pagination)
+
+### getNotifications(*qs*)
 
 > Private endpoint
 
@@ -102,7 +105,10 @@ damn.getNotifications
 })
 ```
 
-### getWatchFeed()
+**Parameters**:
+ - `qs` (object): additional query parameters (eg. for pagination)
+
+### getWatchFeed(*qs*)
 
 > Private endpoint
 
@@ -115,7 +121,10 @@ damn.getWatchFeed
 })
 ```
 
-### getDeviation(*deviationId*)
+**Parameters**:
+ - `qs` (object): additional query parameters (eg. for pagination)
+
+### getDeviation(*deviationId*, *qs*)
 
 > Public endpoint
 
@@ -132,8 +141,9 @@ damn.getDeviation(deviationId)
 
 **Parameters**:
  - `deviationId` (string): the deviation id.
+ - `qs` (object): additional query parameters (eg. for pagination)
 
-### galleryAll(*username*)
+### galleryAll(*username*, *qs*)
 
 > Public endpoint
 
@@ -150,8 +160,9 @@ damn.galleryAll(username)
 
 **Parameters**:
  - `username` (string): optional `username`, defaults to current user
+ - `qs` (object): additional query parameters (eg. for pagination)
 
-### galleryFolder(*folderId*, *username*)
+### galleryFolder(*folderId*, *username*, *qs*)
 
 > Public endpoint
 
@@ -169,8 +180,9 @@ damn.galleryFolder(folderId)
 **Parameters**:
  - `folderId` (string): optional `folderId`
  - `username` (string): optional `username`, defaults to current user
+ - `qs` (object): additional query parameters (eg. for pagination)
 
-### galleryFolders(*username*)
+### galleryFolders(*username*, *qs*)
 
 > Public endpoint
 
@@ -187,6 +199,7 @@ damn.galleryFolders(username)
 
 **Parameters**:
  - `username` (string): optional `username`, defaults to current user
+ - `qs` (object): additional query parameters (eg. for pagination)
 
 ### placebo()
 
