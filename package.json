@@ -1,6 +1,6 @@
 {
   "name": "damn",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DeviantArt API client",
   "main": "dist/index.js",
   "author": "Nathan Gaberel <nathan@gnab.fr>",
