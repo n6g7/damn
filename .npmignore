@@ -2,6 +2,7 @@
 .bithoundrc
 .git
 circle.yml
+coverage
 node_modules
 *.spec.js
 doc
