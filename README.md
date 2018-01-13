@@ -39,7 +39,7 @@ The easiest way to access public API is to use the *Client Credentials* method, 
 Damn.clientCredentials('4321', 'cl13nt_s3cr3t')
 .then(damn => {
   damn.getDailyDeviations()
-  [...]
+  ...
 })
 ```
 
@@ -65,7 +65,7 @@ const scope = 'basic'
 Damn.implicit(clientId, redirectUri, username, password, scope)
 .then(damn => {
   damn.getDailyDeviations()
-  [...]
+  ...
 })
 ```
 
@@ -83,7 +83,7 @@ All these methods are asynchronous and return promises.
 Returns the list of today's [daily deviations](http://www.deviantart.com/dailydeviations/):
 
 ```js
-damn.getDailyDeviations
+damn.getDailyDeviations()
 .then(dailyDeviations => {
   ...
 })
@@ -99,7 +99,7 @@ damn.getDailyDeviations
 Returns the list of current user notifications:
 
 ```js
-damn.getNotifications
+damn.getNotifications()
 .then(notifications => {
   ...
 })
@@ -115,7 +115,7 @@ damn.getNotifications
 Returns the current user's watch feed:
 
 ```js
-damn.getWatchFeed
+damn.getWatchFeed()
 .then(feed => {
   ...
 })
@@ -201,6 +201,45 @@ damn.galleryFolders(username)
  - `username` (string): optional `username`, defaults to current user
  - `qs` (object): additional query parameters (eg. for pagination)
 
+### userFriends(*username*, *qs*)
+
+> Public endpoint
+
+Returns a list of the user's watched friends:
+
+```js
+const username = 'qpsdlq'
+
+damn.userFriends(username)
+.then(friends => {
+  ...
+})
+```
+
+**Parameters**:
+ - `username` (string): username to search for friends of
+ - `qs` (object): additional query parameters (eg. for pagination)
+
+### userFriendsSearch(*username*, *query*)
+
+> Public endpoint
+
+Returns a list of the user's watched friends:
+
+```js
+const username = 'qpsdlq'
+const query = 'bob'
+
+damn.userFriendsSearch(username, query)
+.then(friends => {
+  ...
+})
+```
+
+**Parameters**:
+ - `username` (string): username to search for friends of
+ - `query` (string): Search query (min length: 1)
+
 ### placebo()
 
 > Public endpoint
@@ -229,8 +268,10 @@ damn.checkAccessToken.then(validToken => {
  - [ ] Automate token refresh
  - [X] Setup linter
  - [ ] Add access to the following routes:
+  - [X] `/user/friends/{username}` Get a list of watched friends
+  - [X] `/user/friends/search` Search a list of watched friends
   - [X] `/deviation/{deviationid}` Fetch a deviation
-  - [ ] `/deviation/content` Fetch full data that is not included in the main devaition object
+  - [ ] `/deviation/content` Fetch full data that is not included in the main deviation object
   - [ ] `/browse/morelikethis` Fetch MoreLikeThis result for a seed deviation
   - [ ] `/browse/newest` Browse newest deviations
   - [ ] `/browse/popular` Browse popular deviations
